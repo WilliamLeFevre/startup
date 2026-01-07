@@ -1,8 +1,8 @@
-# Now I am testing making a commit from github web editor
+# Trivia Survival
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Trivia Survival is an application for building a high score, and seeing how you compare with other users. You are continuously fed trivia questions, one after another, and as soon as you miss one, your game ends and you are ranked on the leaderboard. To help you score high, you are equipped with 3 skips, that lets you avoid answering a question you don't know. Make sure you answer quickly, because each question has you on a time limit, and if you don't answer in time, you lose!
 
 
 > [!NOTE]
