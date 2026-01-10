@@ -12,7 +12,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -44,7 +44,7 @@ I am going to use the required technologies in the following ways.
 - **React** - Provides the login, Displaying other users active scores, display new trivia questions, handle the user's input of answer, handle the user's use of a skip, routing and components
 - **Service** - Backend service with endpoints for: Login/Logout support, storing user scores, recieving user answers, retrieving trivia questions from public API
 - **DB/Login** - Store the users, store the high scores of all players
-- **WebSocket** - Description here
+- **WebSocket** - As an online user is currently playing, their current score is broadcast to all other players.
 
 ## 🚀 AWS deliverable
 
