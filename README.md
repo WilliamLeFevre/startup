@@ -40,7 +40,7 @@ Do you believe your knowledge of trivia is unmatched? Now is your chance to prov
 I am going to use the required technologies in the following ways.
 
 - **HTML** - 4 html pages - One for login, one for an about page, one for a gameplay page, one for a leaderboard page
-- **CSS** - Description here
+- **CSS** - Style the application, reformat screen size for different devices
 - **React** - Description here
 - **Service** - Description here
 - **DB/Login** - Description here
