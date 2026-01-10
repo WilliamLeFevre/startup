@@ -10,8 +10,8 @@ Trivia Survival is an application for building a high score, and seeing how you 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x ] A concise and compelling elevator pitch
+- [x ] Description of key features
 - [ ] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -39,7 +39,7 @@ Do you believe your knowledge of trivia is unmatched? Now is your chance to prov
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
+- **HTML** - 4 html pages - One for login, one for an about page, one for a gameplay page, one for a leaderboard page
 - **CSS** - Description here
 - **React** - Description here
 - **Service** - Description here
