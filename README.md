@@ -43,7 +43,7 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Style the application, reformat screen size for different devices
 - **React** - Provides the login, Displaying other users active scores, display new trivia questions, handle the user's input of answer, handle the user's use of a skip, routing and components
 - **Service** - Backend service with endpoints for: Login/Logout support, storing user scores, recieving user answers, retrieving trivia questions from public API
-- **DB/Login** - Description here
+- **DB/Login** - Store the users, store the high scores of all players
 - **WebSocket** - Description here
 
 ## 🚀 AWS deliverable
