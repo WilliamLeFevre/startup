@@ -41,7 +41,7 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - 4 html pages - One for login, one for an about page, one for a gameplay page, one for a leaderboard page
 - **CSS** - Style the application, reformat screen size for different devices
-- **React** - Description here
+- **React** - Provides the login, Displaying other users active scores, display new trivia questions, handle the user's input of answer, handle the user's use of a skip, routing and components
 - **Service** - Description here
 - **DB/Login** - Description here
 - **WebSocket** - Description here
