@@ -56,15 +56,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I have 4 different html pages. An index one which is the home page and login, a leaderboards one, an about one, and a play one.
+- [X] **Proper HTML element usage** - Each page uses header, body, and footer tags. For my headers, I included the link navigations in a menu and nav element. I used form for retrieving user login. I also used a table and bullet lists. For text I used headings, paragraphs, and span tags. Divs were used to arrange elements neatly. 
+- [X] **Links** - The header of each page includes links to all of the pages.
+- [X] **Text** - I have headers to signify the sections, and placeholder text for all scores, usernames, questions, etc.
+- [X] **3rd party API placeholder** - Third party calls will be made to retrieve trivia questions. For now I have manually put in one question as a placeholder
+- [X] **Images** - I placed a logo image in the about page of my website.
+- [X] **Login placeholder** - I used a form and have placed all input elements. Option to eather create account or login exists. Structure is all there, just awaiting implementation.
+- [X] **DB data placeholder** - My leaderboard page features a table to display data. Currently has manually inputed data as a placeholder
+- [X] **WebSocket placeholder** - My play page has a section that shows the other online users and their current scores.
 
 ## 🚀 CSS deliverable
 
