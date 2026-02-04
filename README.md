@@ -70,12 +70,14 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - My header and footer appear on all pages with my main content being different depending on the page
+- [x] **Navigation elements** - The header contains navigation elements to get to the other pages
+- [x] **Responsive to window resizing** - Flex display modes are used so that the page responds to window resizing
+- [x] **Application elements** - The main page contains a styled login form, the play page contains the trivia input box and active online player info, the leaderboard presents a table and the about page has a logo image and description.
+- [x] **Application text content** - There is a text description on the about page, as well as textual content in places like display of trivia questions.
+- [x] **Application images** - The about page contains an image logo.
+
+Even though I'm submitting the deliverable now, I do still think I need to work more on the CSS. I ended up getting really confused by bootstrap and so I had to refer heavily to the simon example for how to do things. I wanted to get something put together for this deliverable so I don't fall behind on the future deliverables, but I do intend to get better at bootstrap and much improve and distinguish my CSS.  
 
 ## 🚀 React part 1: Routing deliverable
 
