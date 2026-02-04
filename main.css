@@ -1,32 +1,26 @@
-header {
-    display: flex;  
-    border: thick solid black;
-    min-height: 100px;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgb(215, 193, 193);
-}
-
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 800px;
-    border: thick red solid;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
 }
 
-header h1 {
-    color:rgb(84, 86, 84);
-    font-size: 25px;
-}
-
-.nav-link {
-    color: rgb(78, 63, 35);
-    font-size: large;
-    
+header {
+  flex: 0 80px;
 }
 
 menu {
-    border: thin solid orange;
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
 }
 
+.navbar-brand {
+  padding-left: 0.3em;
+  border-bottom: solid rgb(182, 182, 182) thin;
+}
+
+menu .nav-item {
+  padding: 0 0.3em;
+}
