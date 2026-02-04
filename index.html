@@ -28,27 +28,24 @@
                     </li>
                 </menu>
             </nav>
-            <hr \>
         </header>
 
-        <main>
-            <h1>Welcome to Trivia Survival</h1>
-            <form method="get" action="play.html">
-                <div>
-                    <span>Username:</span>
-                    <input type="text" placeholder="Your username here" />
+        <main class="container-fluid bg-secondary text-center">
+            <div>
+                <h1>Welcome to Trivia Survival</h1>
+                <form method="get" action="play.html">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Username</span>
+                    <input class="form-control" type="text" placeholder="Your username here" />
                 </div>
-                <div>
-                    <span>Password:</span>
-                    <input type="password" placeholder="Your password here" />
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Password</span>
+                    <input class="form-control" type="password" placeholder="Your password here" />
                 </div>
-                <div>
-                    <button type="submit">Login</button>
-                    <br />
-                    <button type="submit">Create Account</button>
-                </div>
-            </form>
-            <hr \>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-secondary">Create</button>
+                </form>
+            </div>
         </main>
         
         <footer>
