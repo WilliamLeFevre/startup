@@ -31,3 +31,11 @@ main {
   align-items: center;
   justify-content: space-around;
 }
+
+footer {
+  flex: 0 30px;
+}
+
+footer a {
+  float: right;
+}
