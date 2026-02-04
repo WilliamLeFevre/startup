@@ -1,0 +1,32 @@
+header {
+    display: flex;  
+    border: thick solid black;
+    min-height: 100px;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgb(215, 193, 193);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 800px;
+    border: thick red solid;
+    justify-content: center;
+}
+
+header h1 {
+    color:rgb(84, 86, 84);
+    font-size: 25px;
+}
+
+.nav-link {
+    color: rgb(78, 63, 35);
+    font-size: large;
+    
+}
+
+menu {
+    border: thin solid orange;
+}
+
