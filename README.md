@@ -1,0 +1,122 @@
+# Trivia Survival
+
+[My Notes](notes.md)
+
+Trivia Survival is an application for building a high score, and seeing how you compare with other users. You are continuously fed trivia questions, one after another, and as soon as you miss one, your game ends and you are ranked on the leaderboard. To help you score high, you are equipped with 3 skips, that lets you avoid answering a question you don't know. Make sure you answer quickly, because each question has you on a time limit, and if you don't answer in time, you lose!
+
+
+## 🚀 Specification Deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+
+### Elevator pitch
+
+Do you believe your knowledge of trivia is unmatched? Now is your chance to prove it! With Trivia Survival, you engange in an endless guantlet of trivia questions, in an attempt to reach the highest score! Be careful though, as if you get a single question wrong, your game immediately ends! At your disposal is 3 skips to let you get past the really difficult questions. Once you've lost, your score is put onto the leaderboard, and you can see how you rank compared to everyone else. Let's see if you are really as good as you say you are!
+
+### Design
+
+![Design image](sketches/trivia_sketch1.png)
+![Design image](sketches/trivia_sketch2.png)
+![Design image](sketches/trivia_sketch3.png)
+
+### Key features
+
+- Secure login
+- Trivia questions pulled from API
+- Ability to answer Trivia question
+- Online users and their current scores displayed
+- Ability to see your current score and high score
+- Ability to skip question, to a maximum of 3 times
+- Viewable leaderboard ranking all users by their high score
+
+### Technologies
+
+I am going to use the required technologies in the following ways.
+
+- **HTML** - 4 html pages - One for login, one for an about page, one for a gameplay page, one for a leaderboard page
+- **CSS** - Style the application, reformat screen size for different devices
+- **React** - Provides the login, Displaying other users active scores, display new trivia questions, handle the user's input of answer, handle the user's use of a skip, routing and components
+- **Service** - Backend service with endpoints for: Login/Logout support, storing user scores, recieving user answers, retrieving trivia questions from public API
+- **DB/Login** - Store the users, store the high scores of all players
+- **WebSocket** - As an online user is currently playing, their current score is broadcast to all other players.
+
+## 🚀 AWS deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://triviasurvival.click).
+
+## 🚀 HTML deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **HTML pages** - I did not complete this part of the deliverable.
+- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
+- [ ] **Links** - I did not complete this part of the deliverable.
+- [ ] **Text** - I did not complete this part of the deliverable.
+- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
+- [ ] **Images** - I did not complete this part of the deliverable.
+- [ ] **Login placeholder** - I did not complete this part of the deliverable.
+- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
+- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+
+## 🚀 CSS deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
+- [ ] **Navigation elements** - I did not complete this part of the deliverable.
+- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
+- [ ] **Application elements** - I did not complete this part of the deliverable.
+- [ ] **Application text content** - I did not complete this part of the deliverable.
+- [ ] **Application images** - I did not complete this part of the deliverable.
+
+## 🚀 React part 1: Routing deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
+- [ ] **Components** - I did not complete this part of the deliverable.
+- [ ] **Router** - I did not complete this part of the deliverable.
+
+## 🚀 React part 2: Reactivity deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [ ] **Hooks** - I did not complete this part of the deliverable.
+
+## 🚀 Service deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
+- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
+- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+
+
+## 🚀 DB deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
+- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+
+## 🚀 WebSocket deliverable
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
+- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
