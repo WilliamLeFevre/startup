@@ -70,12 +70,14 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [X] **Header, footer, and main content body** - Every page contains the header and fooder, and the main content for it (leaderboard, trivia play area, about page, login). The header uses a pill navbar from bootstrap, and my footer shows me as the creator, and includes a link to my github. 
+- [X] **Navigation elements** - Pill navbar, the current page your on remains highlighted in the navbar, and hovering over the other options changes the color.
+- [X] **Responsive to window resizing** - Footer disappears if the screen height gets too small, on the play page the online users info and your high score info will go if screen is small, leaderboard will remove your rank info depending on window size, and the about page removes the text logo image when the screen gets too low height wise. 
+- [X] **Application elements** - Used forms, buttons, links, navbars, input fields, tables, headings, and more
+- [X] **Application text content** - Used heading and paragraph tags, styled it using bootstrap. Some textual content retains its h class, others use bootstraps display class.
+- [X] **Application images** - The about page contains an img in the form of a text logo for the site. Will remove itself when the screen gets too small to support it.
+
+      Application is styled using mostly bootstrap and the style attribute in tags, but the main.css stylesheet on all pages has a couple important selectors.
 
 ## 🚀 React part 1: Routing deliverable
 
