@@ -77,7 +77,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [X] **Application text content** - Used heading and paragraph tags, styled it using bootstrap. Some textual content retains its h class, others use bootstraps display class.
 - [X] **Application images** - The about page contains an img in the form of a text logo for the site. Will remove itself when the screen gets too small to support it.
 
-      Application is styled using mostly bootstrap and the style attribute in tags, but the main.css stylesheet on all pages has a couple important selectors.
+Application is styled using mostly bootstrap and the style attribute in tags, but the main.css stylesheet on all pages has a couple important selectors.
 
 ## 🚀 React part 1: Routing deliverable
 
