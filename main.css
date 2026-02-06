@@ -2,21 +2,13 @@
   footer {
     display: none;
   }
+  #logo-image {
+    display: none;
+  }
 
 }
 
 .nav-pills .nav-link:hover {
   background-color: #7b8aa1; /* Bootstrap primary */
   color: white;
-}
-
-:root {
-  --bs-primary: #FF6F61;      /* Coral red */
-  --bs-secondary: #4ECDC4;    /* Mint green */
-  --bs-success: #FFD93D;      /* Bright yellow */
-  --bs-info: #6A82FB;         /* Soft blue */
-  --bs-warning: #FFB400;      /* Warm orange */
-  --bs-danger: #FF3B30;       /* Vibrant red */
-  --bs-light: #F5F5F5;        /* Light backgrounds */
-  --bs-dark: #1A1A1D;         /* Dark text */
 }
