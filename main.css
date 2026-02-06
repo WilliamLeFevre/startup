@@ -1,0 +1,6 @@
+@media (max-height: 600px) {
+  footer {
+    display: none;
+  }
+  
+}
