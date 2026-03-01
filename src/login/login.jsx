@@ -7,7 +7,7 @@ export function Login() {
                 <div className="row h-100 justify-content-center align-items-center">
                     <div className="col-12 text-center">
                         <h1 className="display-4 mb-3">Welcome to Trivia Survival!</h1>
-                        <form method="get" action="play.html" className="w-50 mx-auto">
+                        <form method="get" className="w-50 mx-auto">
                             <div className="form-group">
                                 <label>Username</label>
                                 <input type="text" className="form-control mb-4"placeholder="Enter username" />
