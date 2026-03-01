@@ -83,9 +83,9 @@ Application is styled using mostly bootstrap and the style attribute in tags, bu
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [X] **Bundled using Vite** - Vite installed and working!!!
+- [X] **Components** - I had 4 main components: a login, a leaderboard, a play area, and an about area.
+- [X] **Router** - Routing works between all 4 of the components!
 
 ## 🚀 React part 2: Reactivity deliverable
 
