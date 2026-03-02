@@ -15,7 +15,7 @@ export function Leaderboard() {
         for (const [i, score] of scores.entries()) {
             scoreRows.push(
                 <tr>
-                    <th scope="row">{i}</th>
+                    <th scope="row">{i + 1}</th>
                     <td>{score.name}</td>
                     <td>{score.score}</td>
                 </tr>

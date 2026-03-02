@@ -16,8 +16,8 @@
                         <OnlineUsers  userName={userName} score={score}/>
 
 
-                        <TriviaGame highScore={highScore} setHighScore={(score) => setHighScore(score)} 
-                            score={score} setScore={(newScore) => setScore(newScore)}
+                        <TriviaGame highScore={highScore} setHighScore={(score) => setHighScore(score)}
+                            score={score} setScore={(newScore) => setScore(newScore)} userName={userName}
                          />
 
 

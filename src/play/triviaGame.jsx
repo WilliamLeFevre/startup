@@ -1,8 +1,8 @@
-import React from "react"
+import React, { use } from "react"
 import { TriviaField} from "./triviaField"
 
 
-export function TriviaGame({highScore, setHighScore, score, setScore}) {
+export function TriviaGame({highScore, setHighScore, score, setScore, userName}) {
     const [gameRunning, setGameRunning] = React.useState(false)
     const [gameLost, setGameLost] = React.useState(false)
     
@@ -19,6 +19,22 @@ export function TriviaGame({highScore, setHighScore, score, setScore}) {
         if (score > highScore) {
             localStorage.setItem("highScore", score)
             setHighScore(score)
+
+            let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
+
+            let found = false
+            for (let i=0; i < leaderboardScores.length; i++) {
+                if (leaderboardScores[i].name === userName) {
+                    leaderboardScores[i].score = score
+                }
+                found = true;
+                break;
+            }
+            if (!found) {
+                leaderboardScores = [...leaderboardScores, {name: userName, score: score}]
+            }
+            leaderboardScores.sort((a, b) => b.score - a.score);
+            localStorage.setItem("scores", JSON.stringify(leaderboardScores))
         }
         
     }
