@@ -39,7 +39,7 @@ export function Unauthenticated(props) {
             }
         }
         if (!user_found) {
-            alert("Username is incorrect")
+            alert("Username not found")
         }
 
 
