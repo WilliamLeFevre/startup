@@ -14,6 +14,10 @@ export function TriviaGame() {
             {gameRunning === true && (
                 <TriviaResponse />
             )}
+            {gameRunning === false && (
+                <button className="btn btn-lg btn-primary me-2" 
+                onClick={() => setGameRunning(true)}>Start Game</button>
+            )}
         </div>
     )
-}
+} 
