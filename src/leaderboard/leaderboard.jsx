@@ -10,6 +10,25 @@ export function Leaderboard() {
         }
     }, [])
 
+    const scoreRows = []
+    if (scores.length) {
+        for (const [i, score] of scores.entries()) {
+            scoreRows.push(
+                <tr>
+                    <th scope="row">{i}</th>
+                    <td>{score.name}</td>
+                    <td>{score.score}</td>
+                </tr>
+            )
+        }
+    } else {
+        scoreRows.push(
+            <tr key="0">
+                <td colSpan="3">Be the first on the leaderboard!</td>
+            </tr>
+        )
+    }
+
     return (
         <main>
             <div className="container-fluid">
@@ -29,28 +48,7 @@ export function Leaderboard() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ChickenMan</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>TriviaMaster9999</td>
-                                    <td>36</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>ZombieKiller</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr><th scope="row">4</th><td>&nbsp;</td><td></td></tr>
-                                <tr><th scope="row">5</th><td>&nbsp;</td><td></td></tr>
-                                <tr><th scope="row">6</th><td>&nbsp;</td><td></td></tr>
-                                <tr><th scope="row">7</th><td>&nbsp;</td><td></td></tr>
-                                <tr><th scope="row">8</th><td>&nbsp;</td><td></td></tr>
-                                <tr><th scope="row">9</th><td>&nbsp;</td><td></td></tr>
-                                <tr><th scope="row">10</th><td>&nbsp;</td><td></td></tr>
+                                {scoreRows}
                             </tbody>
                         </table>
                     </div>
