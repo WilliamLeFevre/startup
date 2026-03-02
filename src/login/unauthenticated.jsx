@@ -5,30 +5,49 @@ export function Unauthenticated(props) {
     const [password, setPassword] = React.useState("")
 
     async function loginUser() {
-        localStorage.setItem("userName", userName)
+        let users = JSON.parse(localStorage.getItem("users") || "[]")
 
-        let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
+        let user_found = false
+        for (let i=0; i < users.length; i++) {
+            if (users[i].name.toLowerCase() === userName.toLowerCase()) {
+                if (password === users[i].password) {
+                    localStorage.setItem("userName", userName)
 
-        let found = false
-        for (let i=0; i < leaderboardScores.length; i++) {
-            if (leaderboardScores[i].name === userName) {
-                localStorage.setItem("highScore", leaderboardScores[i].score)
-                found = true;
+                    let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
+
+                    let score_found = false
+                    for (let i=0; i < leaderboardScores.length; i++) {
+                        if (leaderboardScores[i].name === userName) {
+                            localStorage.setItem("highScore", leaderboardScores[i].score)
+                            score_found = true;
+                            break;
+                        }
+                    }
+                    if (!score_found) {
+                        localStorage.setItem("highScore", 0)
+                    }
+
+
+                    props.onLogin(userName)
+                    console.log(localStorage)
+                } else {
+                    alert("Incorrect password")
+                }
+
+                user_found = true;
                 break;
             }
         }
-        if (!found) {
-            localStorage.setItem("highScore", 0)
+        if (!user_found) {
+            alert("Username is incorrect")
         }
 
 
-        props.onLogin(userName)
-        console.log(localStorage)
+        
     }
 
     async function createUser() {
         let users = JSON.parse(localStorage.getItem("users") || "[]")
-        console.log(userName)
 
         let found = false
         for (let i=0; i < users.length; i++) {
