@@ -11,7 +11,7 @@ export function Unauthenticated(props) {
         for (let i=0; i < users.length; i++) {
             if (users[i].name.toLowerCase() === userName.toLowerCase()) {
                 if (password === users[i].password) {
-                    localStorage.setItem("userName", userName)
+                    localStorage.setItem("userName", userName.toLowerCase())
 
                     let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
 
@@ -57,7 +57,7 @@ export function Unauthenticated(props) {
             }
         }
         if (!found) {
-            localStorage.setItem("userName", userName)
+            localStorage.setItem("userName", userName.toLowerCase())
             localStorage.setItem("users", JSON.stringify([...users, {name: userName, password: password}]))
             props.onLogin(userName)
         } else {
