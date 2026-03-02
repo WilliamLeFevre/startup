@@ -33,7 +33,6 @@ export function TriviaGame({highScore, setHighScore, score, setScore, userName})
             }
             if (!found) {
                 leaderboardScores = [...leaderboardScores, {name: userName, score: score}]
-                console.log("should have written")
             }
             leaderboardScores.sort((a, b) => b.score - a.score);
             localStorage.setItem("scores", JSON.stringify(leaderboardScores))

@@ -6,6 +6,22 @@ export function Unauthenticated(props) {
 
     async function loginUser() {
         localStorage.setItem("userName", userName)
+
+        let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
+
+        let found = false
+        for (let i=0; i < leaderboardScores.length; i++) {
+            if (leaderboardScores[i].name === userName) {
+                localStorage.setItem("highScore", leaderboardScores[i].score)
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            localStorage.setItem("highScore", 0)
+        }
+
+
         props.onLogin(userName)
         console.log(localStorage)
     }

@@ -3,6 +3,7 @@ import React from "react"
 export function Authenticated({onLogout}) {
     function logout() {
         localStorage.removeItem("userName")
+        localStorage.removeItem("highScore")
         onLogout()
     }
 
