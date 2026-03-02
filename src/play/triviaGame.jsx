@@ -1,11 +1,14 @@
 import React from "react"
+import { TriviaQuestion } from "./triviaQuestion"
 
 export function TriviaGame() {
-
+    const [gameRunning, setGameRunning] = React.useState(false)
 
     return (
-        <div className="col-12 col-md-10 col-xl-8 d-flex flex-column align-items-center justify-content-center" style={{height: "50vh"}}>
-            <div className="h3 mb-4 bg-light p-3 border border-dark">Question: How many coins does Mario have to earn before he gets a 1up?</div>
+        <div className="col-12 col-md-10 col-xl-8 d-flex flex-column align-items-center justify-content-center" 
+        style={{height: "50vh"}}>
+            <TriviaQuestion />
+            
             <div className="mb-3">Seconds left: 15</div>
             
             <div className="d-flex w-100 mb-4">
