@@ -11,7 +11,7 @@ export function Play({userName}) {
 
                 <div className="row mt-4">
 
-                    <OnlineUsers />
+                    <OnlineUsers  userName={userName}/>
 
 
                     <div className="col-12 col-md-10 col-xl-8 d-flex flex-column align-items-center justify-content-center" style={{height: "50vh"}}>

@@ -1,13 +1,44 @@
 import React from "react"
 
-export function OnlineUsers() {
+export function OnlineUsers({userName}) {
     const [users, setUsers] = React.useState([])
 
+    React.useEffect(() => {
+        setInterval(() => {
+            setUsers(getOnlineUsers())
+        }, 5000)
+        
+    }, [])
+
+    function getOnlineUsers() {
+        const fruits = [
+            "Apple",
+            "Banana",
+            "Mango",
+            "Pineapple",
+            "Strawberry",
+            "Orange",
+            "Grape",
+            "Peach",
+            "Kiwi",
+            "Watermelon"
+        ];
+
+        let onlineUsers = [{userName: userName, score: 100}]
+        for (let i=0; i < Math.floor(Math.random() * 10); i++) {
+            let randomUserName = fruits[Math.floor(Math.random() * fruits.length)] + "Flash";
+            let randomScore = Math.floor(Math.random() * 100)
+            onlineUsers = [...onlineUsers, {userName: randomUserName, score: randomScore}]
+        }
+        
+        
+        return onlineUsers
+    }
 
     const userRows = []
     for (let i=0; i < users.length; i++) {
         userRows.push(
-            <li className="fs-5">{users[i]}</li>
+            <li className="fs-5">{users[i].userName}-{users[i].score}</li>
         )
     }
 
