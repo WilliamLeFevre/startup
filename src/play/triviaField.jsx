@@ -22,7 +22,13 @@
         }
 
         function updateTimer() {
-            setTime(time => time - 1)
+            setTime(time => {
+                if (time <= 1) {
+                    loseGame()
+                    return 0
+                }
+                return time - 1
+            })
         }
 
         function skip() {
