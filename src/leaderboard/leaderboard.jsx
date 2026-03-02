@@ -1,12 +1,22 @@
 import React from "react";
 
-export function Leaderboard() {
+export function Leaderboard({userName}) {
     const [scores, setScores] = React.useState([])
+    const [userScore, setUserScore] = React.useState(0)
+    const [userRank, setUserRank] = React.useState(0)
 
     React.useEffect(() => {
         const scoresText = localStorage.getItem("scores")
         if (scoresText) {
-            setScores(JSON.parse(scoresText))
+            let leaderboardScores = JSON.parse(scoresText)
+            setScores(leaderboardScores)
+
+            for (let i = 0; i < leaderboardScores.length; i++) {
+                if (leaderboardScores[i].name === userName) {
+                    setUserScore(leaderboardScores[i].score)
+                    setUserRank(i + 1)
+                }
+            }
         }
     }, [])
 
@@ -56,8 +66,8 @@ export function Leaderboard() {
                         </table>
                     </div>
                     <div className="col-4 d-none d-md-flex flex-column align-items-center justify-content-around" style={{height: "50vh"}}>
-                        <div className="h1 bg-light p-5 border border-dark">Your rank: #30</div>
-                        <div className="h1 bg-light p-5 border border-dark">Your Score: 2</div>
+                        <div className="h1 bg-light p-5 border border-dark">Your rank: #{userRank}</div>
+                        <div className="h1 bg-light p-5 border border-dark">Your Score: {userScore}</div>
                     </div>
                     
                 </div>
