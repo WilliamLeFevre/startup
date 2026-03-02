@@ -12,21 +12,24 @@ export function Leaderboard() {
 
     const scoreRows = []
     if (scores.length) {
-        for (const [i, score] of scores.entries()) {
-            scoreRows.push(
-                <tr>
-                    <th scope="row">{i + 1}</th>
-                    <td>{score.name}</td>
-                    <td>{score.score}</td>
-                </tr>
-            )
+        for (let i = 0; i < 10; i++) {
+            if (scores[i]) {
+                scoreRows.push(
+                    <tr>
+                        <th scope="row">{i + 1}</th>
+                        <td>{scores[i].name}</td>
+                        <td>{scores[i].score}</td>
+                    </tr>
+                )
+            } else {
+                scoreRows.push(
+                    <tr>
+                        <th scope="row">{i + 1}</th>
+                    </tr>
+                )
+            }
+
         }
-    } else {
-        scoreRows.push(
-            <tr key="0">
-                <td colSpan="3">Be the first on the leaderboard!</td>
-            </tr>
-        )
     }
 
     return (

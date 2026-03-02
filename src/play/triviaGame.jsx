@@ -26,12 +26,14 @@ export function TriviaGame({highScore, setHighScore, score, setScore, userName})
             for (let i=0; i < leaderboardScores.length; i++) {
                 if (leaderboardScores[i].name === userName) {
                     leaderboardScores[i].score = score
+                    found = true;
+                    break;
                 }
-                found = true;
-                break;
+                
             }
             if (!found) {
                 leaderboardScores = [...leaderboardScores, {name: userName, score: score}]
+                console.log("should have written")
             }
             leaderboardScores.sort((a, b) => b.score - a.score);
             localStorage.setItem("scores", JSON.stringify(leaderboardScores))
