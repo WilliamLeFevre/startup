@@ -56,7 +56,7 @@ export default function App() {
                             setUserName(userName)
                         }
                     }/>} exact />
-                    <Route path="/play" element={<Play />} />
+                    <Route path="/play" element={<Play userName={userName} />} />
                     <Route path="/leaderboard" element={<Leaderboard />} />
                     <Route path="/about" element={<About />} />
                     <Route path="*" element={<NotFound />} />
