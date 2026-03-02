@@ -8,9 +8,12 @@ export function TriviaGame() {
     return (
         <div className="col-12 col-md-10 col-xl-8 d-flex flex-column align-items-center justify-content-center" 
         style={{height: "50vh"}}>
-            <TriviaQuestion />
-            
-            <TriviaResponse />
+            {gameRunning === true && (
+                <TriviaQuestion />
+            )}
+            {gameRunning === true && (
+                <TriviaResponse />
+            )}
         </div>
     )
 }
