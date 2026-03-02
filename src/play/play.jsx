@@ -5,6 +5,7 @@ import { TriviaGame } from "./triviaGame";
 export function Play({userName}) {
     const [highScore, setHighScore] = React.useState(localStorage.getItem("highScore") || 0)
     
+    
     return (
         <main>
             <div className="container-fluid">
@@ -15,7 +16,7 @@ export function Play({userName}) {
                     <OnlineUsers  userName={userName}/>
 
 
-                    <TriviaGame />
+                    <TriviaGame highScore={highScore} setHighScore={(score) => setHighScore(score)}/>
 
 
                     <div className="col-2 d-none d-md-block p-3">
