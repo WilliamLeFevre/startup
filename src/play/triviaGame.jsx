@@ -1,6 +1,6 @@
 import React from "react"
-import { TriviaQuestion } from "./triviaQuestion"
-import { TriviaResponse } from "./triviaResponse"
+import { TriviaField} from "./triviaField"
+
 
 export function TriviaGame() {
     const [gameRunning, setGameRunning] = React.useState(false)
@@ -9,10 +9,7 @@ export function TriviaGame() {
         <div className="col-12 col-md-10 col-xl-8 d-flex flex-column align-items-center justify-content-center" 
         style={{height: "50vh"}}>
             {gameRunning === true && (
-                <TriviaQuestion />
-            )}
-            {gameRunning === true && (
-                <TriviaResponse />
+                <TriviaField />
             )}
             {gameRunning === false && (
                 <button className="btn btn-lg btn-primary me-2" 
@@ -20,4 +17,4 @@ export function TriviaGame() {
             )}
         </div>
     )
-} 
+}
