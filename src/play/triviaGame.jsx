@@ -2,7 +2,7 @@ import React from "react"
 import { TriviaField} from "./triviaField"
 
 
-export function TriviaGame({highScore, setHighScore}) {
+export function TriviaGame({highScore, setHighScore, score, setScore}) {
     const [gameRunning, setGameRunning] = React.useState(false)
     const [gameLost, setGameLost] = React.useState(false)
     

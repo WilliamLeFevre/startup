@@ -1,14 +1,16 @@
 import React from "react"
 
-export function OnlineUsers({userName}) {
+export function OnlineUsers({userName, score}) {
     const [users, setUsers] = React.useState([])
 
     React.useEffect(() => {
-        setInterval(() => {
+        setUsers(getOnlineUsers())
+        const interval = setInterval(() => {
             setUsers(getOnlineUsers())
-        }, 5000)
-        
-    }, [])
+        }, 4000)
+
+        return () => clearInterval(interval)
+    }, [score])
 
     function getOnlineUsers() {
         const fruits = [
@@ -24,7 +26,9 @@ export function OnlineUsers({userName}) {
             "Watermelon"
         ];
 
-        let onlineUsers = [{userName: userName, score: 100}]
+        console.log(score)
+        let onlineUsers = [{userName: userName, score: score}]
+        console.log(onlineUsers)
         for (let i=0; i < Math.floor(Math.random() * 10); i++) {
             let randomUserName = fruits[Math.floor(Math.random() * fruits.length)] + "Flash";
             let randomScore = Math.floor(Math.random() * 100)
