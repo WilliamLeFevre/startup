@@ -9,9 +9,9 @@ import {About} from "./about/about";
 import { AuthState } from "./login/authState";
 
 export default function App() {
-    const [userName, setUserName] = React.useState(localStorage.getItem("username") || "");
-    const currAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
-    const [authState, setAuthState] = React.useState(currAuthState);
+    const [userName, setUserName] = React.useState(localStorage.getItem("userName") || "");
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
 
     return (
         <BrowserRouter>
@@ -49,7 +49,13 @@ export default function App() {
                 </header>
 
                 <Routes>
-                    <Route path="/" element={<Login />} exact />
+                    <Route path="/" element=
+                    {<Login authState={authState} userName={userName} onAuthChange={
+                        (userName, authState) => {
+                            setAuthState(authState)
+                            setUserName(userName)
+                        }
+                    }/>} exact />
                     <Route path="/play" element={<Play />} />
                     <Route path="/leaderboard" element={<Leaderboard />} />
                     <Route path="/about" element={<About />} />
