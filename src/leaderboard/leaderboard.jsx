@@ -1,6 +1,15 @@
 import React from "react";
 
 export function Leaderboard() {
+    const [scores, setScores] = React.useState([])
+
+    React.useEffect(() => {
+        const scoresText = localStorage.getItem("scores")
+        if (scoresText) {
+            setScores(JSON.parse(scoresText))
+        }
+    }, [])
+
     return (
         <main>
             <div className="container-fluid">
