@@ -91,8 +91,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out** - Everything works! Username and password login system functional. Implemented mock function for the trivia question retrieval system, that will be replaced with a call to a third party later. Leaderboard pulls from local data for now.
+- [X] **Hooks** - Used both useState and useEffect throughout the deliverable.
 
 ## 🚀 Service deliverable
 
