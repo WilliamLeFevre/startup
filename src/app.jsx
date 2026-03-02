@@ -6,8 +6,13 @@ import {Login} from "./login/login";
 import {Play} from "./play/play";
 import {Leaderboard} from "./leaderboard/leaderboard";
 import {About} from "./about/about";
+import { AuthState } from "./login/authState";
 
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem("username") || "");
+    const currAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currAuthState);
+
     return (
         <BrowserRouter>
             <div>
@@ -22,12 +27,16 @@ export default function App() {
                                     <li className="nav-item">
                                         <NavLink className="nav-link border border-primary" to="">Home</NavLink>
                                     </li>
+                                    {authState === AuthState.Authenticated && (
                                     <li className="nav-item">
                                         <NavLink className="nav-link border border-primary" to="play">Play</NavLink>
                                     </li>
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link border border-primary" to="leaderboard">Leaderboard</NavLink>
-                                    </li>
+                                    )}
+                                    {authState === AuthState.Authenticated && (
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link border border-primary" to="leaderboard">Leaderboard</NavLink>
+                                        </li>
+                                    )}
                                     <li className="nav-item">
                                         <NavLink className="nav-link border border-primary" to="about">About</NavLink>
                                     </li>
