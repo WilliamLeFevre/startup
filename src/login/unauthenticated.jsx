@@ -27,8 +27,24 @@ export function Unauthenticated(props) {
     }
 
     async function createUser() {
-        localStorage.setItem("userName", userName)
-        props.onLogin(userName)
+        let users = JSON.parse(localStorage.getItem("users") || "[]")
+        console.log(userName)
+
+        let found = false
+        for (let i=0; i < users.length; i++) {
+            if (users[i].name.toLowerCase() === userName.toLowerCase()) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            localStorage.setItem("userName", userName)
+            localStorage.setItem("users", JSON.stringify([...users, {name: userName, password: password}]))
+            props.onLogin(userName)
+        } else {
+            alert("Username taken!")
+        }
+
     }
 
     return (
