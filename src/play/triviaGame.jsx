@@ -10,6 +10,7 @@ export function TriviaGame({highScore, setHighScore, score, setScore}) {
     function startGame() {
         setGameRunning(true)
         setGameLost(false)
+        setScore(0)
     }
 
     function loseGame() {
