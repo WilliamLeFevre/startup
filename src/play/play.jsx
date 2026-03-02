@@ -2,7 +2,7 @@ import React from "react";
 import { OnlineUsers } from "./onlineUsers";
 
 export function Play({userName}) {
-
+    const [highScore, setHighScore] = React.useState(localStorage.getItem("highScore") || 0)
     
     return (
         <main>
@@ -26,13 +26,14 @@ export function Play({userName}) {
                         <div className="w-100 d-flex justify-content-between">
                             <div>Score: 5</div>
                             <button className="btn btn-primary">Submit</button>
-                            <div>Skips Left: 2</div>
+                            <div>Skips Left: 3</div>
                         </div>
                     </div>
 
+
                     <div className="col-2 d-none d-md-block p-3">
                         <h3>Current User: {userName}</h3>
-                        <h5>High Score: 23</h5>
+                        <h5>High Score: {highScore}</h5>
                     </div>
                 </div>
             </div>
