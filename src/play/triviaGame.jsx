@@ -13,30 +13,40 @@ export function TriviaGame({highScore, setHighScore, score, setScore, userName})
         setScore(0)
     }
 
+    async function saveScore(score) {
+        const newScore = {name: userName, score: score}
+        await fetch("/api/score", {
+            method: "POST", 
+            headers: {"content-type": "application/json"}, 
+            body: JSON.stringify(newScore), 
+        })
+    }
+
     function loseGame() {
         setGameRunning(false)
         setGameLost(true)
-        if (score > highScore) {
-            localStorage.setItem("highScore", score)
-            setHighScore(score)
+        saveScore(score)
+        // if (score > highScore) {
+        //     localStorage.setItem("highScore", score)
+        //     setHighScore(score)
 
-            let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
+        //     let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
 
-            let found = false
-            for (let i=0; i < leaderboardScores.length; i++) {
-                if (leaderboardScores[i].name === userName) {
-                    leaderboardScores[i].score = score
-                    found = true;
-                    break;
-                }
+        //     let found = false
+        //     for (let i=0; i < leaderboardScores.length; i++) {
+        //         if (leaderboardScores[i].name === userName) {
+        //             leaderboardScores[i].score = score
+        //             found = true;
+        //             break;
+        //         }
                 
-            }
-            if (!found) {
-                leaderboardScores = [...leaderboardScores, {name: userName, score: score}]
-            }
-            leaderboardScores.sort((a, b) => b.score - a.score);
-            localStorage.setItem("scores", JSON.stringify(leaderboardScores))
-        }
+        //     }
+        //     if (!found) {
+        //         leaderboardScores = [...leaderboardScores, {name: userName, score: score}]
+        //     }
+        //     leaderboardScores.sort((a, b) => b.score - a.score);
+        //     localStorage.setItem("scores", JSON.stringify(leaderboardScores))
+        // }
         
     }
 
