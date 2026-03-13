@@ -5,21 +5,6 @@ export function Leaderboard({userName}) {
     const [userScore, setUserScore] = React.useState(0)
     const [userRank, setUserRank] = React.useState(0)
 
-    // React.useEffect(() => {
-    //     const scoresText = localStorage.getItem("scores")
-    //     if (scoresText) {
-    //         let leaderboardScores = JSON.parse(scoresText)
-    //         setScores(leaderboardScores)
-
-    //         for (let i = 0; i < leaderboardScores.length; i++) {
-    //             if (leaderboardScores[i].name === userName) {
-    //                 setUserScore(leaderboardScores[i].score)
-    //                 setUserRank(i + 1)
-    //             }
-    //         }
-    //     }
-    // }, [])
-
     React.useEffect(() => {
         fetch("/api/scores")
             .then((response) => response.json())
