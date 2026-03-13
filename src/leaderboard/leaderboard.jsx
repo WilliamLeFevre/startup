@@ -9,30 +9,44 @@ export function Leaderboard({userName}) {
         fetch("/api/scores")
             .then((response) => response.json())
             .then((scores) => {
-                setScores(scores)
+                let filtered_scores = []
+                let displayed = []
+                for (let i = 0; i < scores.length; i++) {
+                    if (displayed.includes(scores[i].name) === false) {
+                        filtered_scores.push(scores[i])
+                        displayed.push(scores[i].name)
+                    }
+                }
+                setScores(filtered_scores)
+
+                for (let i = 0; i < filtered_scores.length; i++) {
+                    if (filtered_scores[i].name === userName) {
+                        setUserRank(i + 1)
+                        setUserScore(filtered_scores[i].score)
+                        break
+                    }
+                }
             });
+        
     }, []);
 
+
+
     const scoreRows = []
-    let displayed = []
-    let rank = 1
     if (scores.length) {
         for (let i = 0; i < 10; i++) {
             if (scores[i]) {
-                if (displayed.includes(scores[i].name) === false) {
-                    scoreRows.push(
-                        <tr>
-                            <th scope="row">{rank++}</th>
-                            <td>{scores[i].name}</td>
-                            <td>{scores[i].score}</td>
-                        </tr>
-                    )
-                    displayed.push(scores[i].name)
-                }
+                scoreRows.push(
+                    <tr>
+                        <th scope="row">{i + 1}</th>
+                        <td>{scores[i].name}</td>
+                        <td>{scores[i].score}</td>
+                    </tr>
+                )
             } else {
                 scoreRows.push(
                     <tr>
-                        <th scope="row">{rank++}</th>
+                        <th scope="row">{i + 1}</th>
                     </tr>
                 )
             }
