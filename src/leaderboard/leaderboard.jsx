@@ -5,6 +5,21 @@ export function Leaderboard({userName}) {
     const [userScore, setUserScore] = React.useState(0)
     const [userRank, setUserRank] = React.useState(0)
 
+    // React.useEffect(() => {
+    //     const scoresText = localStorage.getItem("scores")
+    //     if (scoresText) {
+    //         let leaderboardScores = JSON.parse(scoresText)
+    //         setScores(leaderboardScores)
+
+    //         for (let i = 0; i < leaderboardScores.length; i++) {
+    //             if (leaderboardScores[i].name === userName) {
+    //                 setUserScore(leaderboardScores[i].score)
+    //                 setUserRank(i + 1)
+    //             }
+    //         }
+    //     }
+    // }, [])
+
     React.useEffect(() => {
         fetch("/api/scores")
             .then((response) => response.json())
@@ -14,16 +29,20 @@ export function Leaderboard({userName}) {
     }, []);
 
     const scoreRows = []
+    let displayed = []
     if (scores.length) {
         for (let i = 0; i < 10; i++) {
             if (scores[i]) {
-                scoreRows.push(
-                    <tr>
-                        <th scope="row">{i + 1}</th>
-                        <td>{scores[i].name}</td>
-                        <td>{scores[i].score}</td>
-                    </tr>
-                )
+                if (displayed.includes(scores[i].name) === false) {
+                    scoreRows.push(
+                        <tr>
+                            <th scope="row">{i + 1}</th>
+                            <td>{scores[i].name}</td>
+                            <td>{scores[i].score}</td>
+                        </tr>
+                    )
+                    displayed.push(scores[i].name)
+                }
             } else {
                 scoreRows.push(
                     <tr>
