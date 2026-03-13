@@ -2,9 +2,16 @@ import React from "react"
 
 export function Authenticated({onLogout}) {
     function logout() {
-        localStorage.removeItem("userName")
-        localStorage.removeItem("highScore")
-        onLogout()
+        fetch(`/api/auth/logout`, {
+            method: "delete", 
+        })
+            .catch(() => {
+
+            })
+            .finally(() => {
+                localStorage.removeItem("userName")
+                onLogout()
+            })
     }
 
     return (
