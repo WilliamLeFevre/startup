@@ -55,6 +55,12 @@ async function createUser(username, password) {
     return user
 }
 
+async function findUser(field, value) {
+    if (!value) return null
+
+    return users.find((u) => u[field] === value);
+}
+
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
