@@ -59,6 +59,15 @@ const verifyAuth = async (req, res, next) => {
     }
 }
 
+apiRouter.get("/scores", verifyAuth, (_req, res) => {
+    res.send(scores)
+})
+
+apiRouter.post("/score", verifyAuth, (req, res) => {
+    scores = updateScores(req.body)
+    res.send(scores)
+})
+
 
 function updateScores(newScore) {
     let found = false
