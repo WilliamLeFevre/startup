@@ -15,10 +15,19 @@
             }, 1000)
         }, [])
 
-        function getPrompt() {
-            let randomNum = Math.floor(Math.random() * 5) + 1
-            setQuestion("How many coins does it take for Mario to earn " + randomNum + " 1ups")
-            setAnswer(String(100 * randomNum))
+        async function getPrompt() {
+            const response = await fetch("https://opentdb.com/api.php?amount=1");
+            const data = await response.json();
+            const item = data.results[0];
+
+            
+            const parser = new DOMParser();
+            const decodedQuestion = parser.parseFromString(item.question, "text/html").body.textContent;
+
+            setQuestion(decodedQuestion);
+
+            
+            setAnswer(item.correct_answer.toLowerCase());
         }
 
         function updateTimer() {
@@ -40,7 +49,7 @@
         }
 
         function submitResponse() {
-            if (response === answer) {
+            if (response.toLowerCase() === answer) {
                 setResponse("")
                 setScore(score => score + 1)
                 getPrompt()
