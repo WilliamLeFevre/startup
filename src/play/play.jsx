@@ -3,8 +3,20 @@
     import { TriviaGame } from "./triviaGame";
 
     export function Play({userName}) {
-        const [highScore, setHighScore] = React.useState(localStorage.getItem("highScore") || 0)
+        const [highScore, setHighScore] = React.useState(0)
         const [score, setScore] = React.useState(0)
+
+        React.useEffect(() => {
+            fetch("/api/scores")
+                .then((res) => res.json())
+                .then((scores) => {
+                    // Find the current user's top score
+                    const userScore = scores
+                        .filter((s) => s.name === userName)
+                        .reduce((max, s) => Math.max(max, s.score), 0);
+                    setHighScore(userScore);
+                });
+        }, [userName]);
         
         return (
             <main>
