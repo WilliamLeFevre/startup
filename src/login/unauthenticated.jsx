@@ -5,65 +5,27 @@ export function Unauthenticated(props) {
     const [password, setPassword] = React.useState("")
 
     async function loginUser() {
-        let users = JSON.parse(localStorage.getItem("users") || "[]")
-
-        let user_found = false
-        for (let i=0; i < users.length; i++) {
-            if (users[i].name.toLowerCase() === userName.toLowerCase()) {
-                if (password === users[i].password) {
-                    localStorage.setItem("userName", userName.toLowerCase())
-
-                    let leaderboardScores = JSON.parse(localStorage.getItem("scores") || "[]")
-
-                    let score_found = false
-                    for (let i=0; i < leaderboardScores.length; i++) {
-                        if (leaderboardScores[i].name === userName) {
-                            localStorage.setItem("highScore", leaderboardScores[i].score)
-                            score_found = true;
-                            break;
-                        }
-                    }
-                    if (!score_found) {
-                        localStorage.setItem("highScore", 0)
-                    }
-
-
-                    props.onLogin(userName)
-                    console.log(localStorage)
-                } else {
-                    alert("Incorrect password")
-                }
-
-                user_found = true;
-                break;
-            }
-        }
-        if (!user_found) {
-            alert("Username not found")
-        }
-
-
-        
+        loginOrCreate(`/api/auth/login`)
     }
 
     async function createUser() {
-        let users = JSON.parse(localStorage.getItem("users") || "[]")
+        loginOrCreate(`/api/auth/create`)
+    }
 
-        let found = false
-        for (let i=0; i < users.length; i++) {
-            if (users[i].name.toLowerCase() === userName.toLowerCase()) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            localStorage.setItem("userName", userName.toLowerCase())
-            localStorage.setItem("users", JSON.stringify([...users, {name: userName, password: password}]))
+    async function loginOrCreate(endpoint) {
+        const response = await fetch(endpoint, {
+            method: "post", 
+            body: JSON.stringify({username: userName, password: password}), 
+            headers: {
+                "Content-type": "application/json; charset=UTF-8", 
+            }, 
+        })
+        if (response?.status === 200) {
+            localStorage.setItem("userName", userName)
             props.onLogin(userName)
         } else {
-            alert("Username taken!")
+            const body = await response.json()
         }
-
     }
 
     return (
