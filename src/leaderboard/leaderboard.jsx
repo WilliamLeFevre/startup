@@ -15,13 +15,14 @@ export function Leaderboard({userName}) {
 
     const scoreRows = []
     let displayed = []
+    let rank = 1
     if (scores.length) {
         for (let i = 0; i < 10; i++) {
             if (scores[i]) {
                 if (displayed.includes(scores[i].name) === false) {
                     scoreRows.push(
                         <tr>
-                            <th scope="row">{i + 1}</th>
+                            <th scope="row">{rank++}</th>
                             <td>{scores[i].name}</td>
                             <td>{scores[i].score}</td>
                         </tr>
@@ -31,7 +32,7 @@ export function Leaderboard({userName}) {
             } else {
                 scoreRows.push(
                     <tr>
-                        <th scope="row">{i + 1}</th>
+                        <th scope="row">{rank++}</th>
                     </tr>
                 )
             }
