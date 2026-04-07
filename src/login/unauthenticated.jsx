@@ -3,6 +3,7 @@ import React from "react";
 export function Unauthenticated(props) {
     const [userName, setUserName] = React.useState(props.userName)
     const [password, setPassword] = React.useState("")
+    const [errorMsg, setErrorMsg] = React.useState("")
 
     async function loginUser() {
         loginOrCreate(`/api/auth/login`)
@@ -13,6 +14,7 @@ export function Unauthenticated(props) {
     }
 
     async function loginOrCreate(endpoint) {
+        setErrorMsg("")
         const response = await fetch(endpoint, {
             method: "post", 
             body: JSON.stringify({username: userName, password: password}), 
@@ -21,15 +23,19 @@ export function Unauthenticated(props) {
             }, 
         })
         if (response?.status === 200) {
-            localStorage.setItem("userName", userName)
+            // Do NOT store credentials in localStorage — auth is handled via httpOnly cookie
             props.onLogin(userName)
         } else {
             const body = await response.json()
+            setErrorMsg(body.msg || "Login failed. Please try again.")
         }
     }
 
     return (
         <div className="w-50 mx-auto">
+            {errorMsg && (
+                <div className="alert alert-danger" role="alert">{errorMsg}</div>
+            )}
             <div className="form-group">
                 <label>Username</label>
                 <input type="text" className="form-control mb-4" placeholder="Enter username" 

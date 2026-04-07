@@ -9,6 +9,7 @@ export function Leaderboard({userName}) {
         fetch("/api/scores")
             .then((response) => response.json())
             .then((scores) => {
+                // Deduplicate: keep only the best score per user
                 let filtered_scores = []
                 let displayed = []
                 for (let i = 0; i < scores.length; i++) {
@@ -28,16 +29,15 @@ export function Leaderboard({userName}) {
                 }
             });
         
-    }, []);
-
-
+    // Re-fetch whenever the component mounts (page navigation) or userName changes
+    }, [userName]);
 
     const scoreRows = []
     if (scores.length) {
         for (let i = 0; i < 10; i++) {
             if (scores[i]) {
                 scoreRows.push(
-                    <tr>
+                    <tr key={i}>
                         <th scope="row">{i + 1}</th>
                         <td>{scores[i].name}</td>
                         <td>{scores[i].score}</td>
@@ -45,12 +45,13 @@ export function Leaderboard({userName}) {
                 )
             } else {
                 scoreRows.push(
-                    <tr>
+                    <tr key={i}>
                         <th scope="row">{i + 1}</th>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
                 )
             }
-
         }
     }
 
@@ -78,7 +79,7 @@ export function Leaderboard({userName}) {
                         </table>
                     </div>
                     <div className="col-4 d-none d-md-flex flex-column align-items-center justify-content-around" style={{height: "50vh"}}>
-                        <div className="h1 bg-light p-5 border border-dark">Your rank: #{userRank}</div>
+                        <div className="h1 bg-light p-5 border border-dark">Your rank: #{userRank || "—"}</div>
                         <div className="h1 bg-light p-5 border border-dark">Your Score: {userScore}</div>
                     </div>
                     

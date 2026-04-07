@@ -5,11 +5,9 @@ export function Authenticated({onLogout}) {
         fetch(`/api/auth/logout`, {
             method: "delete", 
         })
-            .catch(() => {
-
-            })
+            .catch(() => {})
             .finally(() => {
-                localStorage.removeItem("userName")
+                // Do not touch localStorage — credentials are not stored there
                 onLogout()
             })
     }

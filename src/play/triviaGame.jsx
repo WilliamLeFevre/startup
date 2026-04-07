@@ -1,8 +1,8 @@
-import React, { use } from "react"
+import React from "react"
 import { TriviaField} from "./triviaField"
 
 
-export function TriviaGame({highScore, setHighScore, score, setScore, userName}) {
+export function TriviaGame({highScore, setHighScore, score, setScore, userName, onGameEnd}) {
     const [gameRunning, setGameRunning] = React.useState(false)
     const [gameLost, setGameLost] = React.useState(false)
     
@@ -13,28 +13,30 @@ export function TriviaGame({highScore, setHighScore, score, setScore, userName})
         setScore(0)
     }
 
-    async function saveScore(score) {
-        const newScore = {name: userName, score: score}
-        await fetch("/api/score", {
+    async function saveScore(finalScore) {
+        const newScore = {name: userName, score: finalScore}
+        const res = await fetch("/api/score", {
             method: "POST", 
             headers: {"content-type": "application/json"}, 
             body: JSON.stringify(newScore), 
         })
+        if (res.ok) {
+            // After saving, tell the parent to refresh the high score & leaderboard
+            if (onGameEnd) onGameEnd()
+        }
     }
 
-    function loseGame() {
+    function loseGame(finalScore) {
         setGameRunning(false)
         setGameLost(true)
-        saveScore(score)
-    
-        
+        saveScore(finalScore)
     }
 
     return (
         <div className="col-12 col-md-10 col-xl-8 d-flex flex-column align-items-center justify-content-center" 
         style={{height: "50vh"}}>
             {gameRunning === true && (
-                <TriviaField loseGame={() => loseGame()} score={score} 
+                <TriviaField loseGame={(finalScore) => loseGame(finalScore)} score={score} 
                 setScore={(newScore) => setScore(newScore)}/>
             )}
             {gameLost === true && (

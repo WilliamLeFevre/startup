@@ -9,9 +9,10 @@ import {About} from "./about/about";
 import { AuthState } from "./login/authState";
 
 export default function App() {
-    const [userName, setUserName] = React.useState(localStorage.getItem("userName") || "");
-    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
-    const [authState, setAuthState] = React.useState(currentAuthState);
+    // Do NOT use localStorage to persist userName — credentials are handled server-side via httpOnly cookie.
+    // userName is only kept in React state for display purposes.
+    const [userName, setUserName] = React.useState("");
+    const [authState, setAuthState] = React.useState(AuthState.Unauthenticated);
 
     return (
         <BrowserRouter>
@@ -74,10 +75,6 @@ export default function App() {
                                 <a className="btn btn-primary btn-sm" href="https://github.com/WilliamLeFevre/startup">Source Code</a>
                             </div>
                         </div>
-                        
-                            
-                            
-                        
                     </div>
                 </footer>
                 
