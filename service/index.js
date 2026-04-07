@@ -1,8 +1,9 @@
 const express = require("express");
-const cookieParser = require("cookie-parser")
-const bcrypt = require("bcryptjs")
-const uuid = require("uuid")
-const WebSocket = require("ws")
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const uuid = require("uuid");
+const http = require("http");
+const WebSocket = require("ws");
 
 const app = express();
 const authCookieName = "token";
@@ -10,138 +11,86 @@ const authCookieName = "token";
 let users = [];
 let scores = [];
 
-const connections = new Map()
+
+const connections = new Map();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 let apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-
 apiRouter.post("/auth/create", async (req, res) => {
-    if (await findUser("username", req.body.username)) {
-        res.status(409).send({msg: "Existing User"})
-    } else {
-        const user = await createUser(req.body.username, req.body.password)
-        setAuthCookie(res, user.token)
-        res.send({username: user.username})
-    }
-})
+  if (await findUser("username", req.body.username)) {
+    res.status(409).send({ msg: "Existing User" });
+  } else {
+    const user = await createUser(req.body.username, req.body.password);
+    setAuthCookie(res, user.token);
+    res.send({ username: user.username });
+  }
+});
 
 apiRouter.post("/auth/login", async (req, res) => {
-    const user = await findUser("username", req.body.username)
-    if (user) {
-        if (await bcrypt.compare(req.body.password, user.password)) {
-            user.token = uuid.v4()
-            setAuthCookie(res, user.token)
-            res.send({username: user.username})
-            return
-        }
+  const user = await findUser("username", req.body.username);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      user.token = uuid.v4();
+      setAuthCookie(res, user.token);
+      res.send({ username: user.username });
+      return;
     }
-    res.status(401).send({msg: "Unauthorized"})
-})
+  }
+  res.status(401).send({ msg: "Unauthorized" });
+});
 
 apiRouter.delete("/auth/logout", async (req, res) => {
-    const user = await findUser("token", req.cookies[authCookieName])
-    if (user) {
-        delete user.token
-    }
-    res.clearCookie(authCookieName)
-    res.status(204).end()
-})
+  const user = await findUser("token", req.cookies[authCookieName]);
+  if (user) {
+    delete user.token;
+  }
+  res.clearCookie(authCookieName);
+  res.status(204).end();
+});
 
 const verifyAuth = async (req, res, next) => {
-    const user = await findUser("token", req.cookies[authCookieName])
-    if (user) {
-        next()
-    } else {
-        res.status(401).send({msg: "Unauthorized"})
-    }
-}
+  const user = await findUser("token", req.cookies[authCookieName]);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: "Unauthorized" });
+  }
+};
 
 apiRouter.get("/scores", verifyAuth, (_req, res) => {
-    res.send(scores)
-})
+  res.send(scores);
+});
 
 apiRouter.post("/score", verifyAuth, (req, res) => {
-    scores = updateScores(req.body)
-    res.send(scores)
-})
+  scores = updateScores(req.body);
+  res.send(scores);
+});
 
 app.use(function (err, req, res, next) {
-    res.status(500).send({type: err.name, message: err.message})
-})
+  res.status(500).send({ type: err.name, message: err.message });
+});
 
 app.use((_req, res) => {
-    res.sendFile("index.html", {root: "public"})
-})
-
-function updateScores(newScore) {
-    let found = false
-    for (const [i, prevScore] of scores.entries()) {
-        if (newScore.score > prevScore.score) {
-            scores.splice(i, 0, newScore)
-            found = true
-            break
-        }
-    }
-
-    if (!found) {
-        scores.push(newScore);
-    }
-
-    if (scores.length > 10) {
-        scores.length = 10
-    }
-
-    return scores
-}
-
-async function createUser(username, password) {
-    const passwordHash = await bcrypt.hash(password, 10)
-
-    const user = {
-        username: username, 
-        password: passwordHash, 
-        token: uuid.v4(), 
-    }
-    users.push(user)
-
-    return user
-}
-
-async function findUser(field, value) {
-    if (!value) return null
-
-    return users.find((u) => u[field] === value);
-}
-
-function setAuthCookie(res, authToken) {
-    res.cookie(authCookieName, authToken, {
-        secure: true, 
-        httpOnly: true, 
-        sameSite: "strict", 
-    })
-}
+  res.sendFile("index.html", { root: "public" });
+});
 
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
-})
+const server = http.createServer(app);
 
-const server = http.createServer(app)
 
-const wws = new WebSocket.Server({server, path: "/ws"})
+const wss = new WebSocket.Server({ server, path: "/ws" });
 
 wss.on("connection", (ws) => {
   connections.set(ws, { userName: null, score: 0 });
 
-  
+
   ws.send(JSON.stringify({ type: "userList", users: getOnlineUsers() }));
 
   ws.on("message", (raw) => {
@@ -156,7 +105,7 @@ wss.on("connection", (ws) => {
         broadcast({ type: "userList", users: getOnlineUsers() });
       }
     } catch (e) {
-      
+  
     }
   });
 
@@ -167,58 +116,58 @@ wss.on("connection", (ws) => {
 });
 
 function getOnlineUsers() {
-    const list = []
-    for (const info of connections.values()) {
-        if (info.userName) {
-            list.push({userName: info.userName, score: info.score})
-        }
+  const list = [];
+  for (const info of connections.values()) {
+    if (info.userName) {
+      list.push({ userName: info.userName, score: info.score });
     }
-    return list;
+  }
+  return list;
 }
 
 function broadcast(payload) {
-    const msg = JSON.stringify(payload)
-    for (const client of wss.client) {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(msg)
-        }
+  const msg = JSON.stringify(payload);
+  for (const client of wss.clients) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(msg);
     }
+  }
 }
 
 function updateScores(newScore) {
-    let found = false
-    for (const [i, prevScore] of scores.entries()) {
-        if (newScore.score > prevScore.score) {
-            scores.splice(i, 0, newScore)
-            found = true
-            break
-        }
+  let found = false;
+  for (const [i, prevScore] of scores.entries()) {
+    if (newScore.score > prevScore.score) {
+      scores.splice(i, 0, newScore);
+      found = true;
+      break;
     }
-    if (!found) scores.push(newScore)
-    if (scores.length > 10) scores.length = 10
-    return scores
+  }
+  if (!found) scores.push(newScore);
+  if (scores.length > 10) scores.length = 10;
+  return scores;
 }
 
 async function createUser(username, password) {
-    const passwordHash = await bcrypt.hash(password, 10);
-    const user = {username, password: passwordHash, token: uuid.v4()};
-    users.push(user)
-    return user;
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = { username, password: passwordHash, token: uuid.v4() };
+  users.push(user);
+  return user;
 }
 
 async function findUser(field, value) {
-    if (!value) return null;
-    return users.find((u) => u[field] === value);
+  if (!value) return null;
+  return users.find((u) => u[field] === value);
 }
 
 function setAuthCookie(res, authToken) {
-    res.cookie(authCookieName, authToken, {
-        secure: true, 
-        httpOnly: true, 
-        sameSite: "strict",
-    })
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: "strict",
+  });
 }
 
 server.listen(port, () => {
-    console.log("Listening")
-})
+  console.log(`Listening on port ${port}`);
+});
