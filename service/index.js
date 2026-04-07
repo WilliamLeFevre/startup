@@ -139,24 +139,32 @@ const server = http.createServer(app)
 const wws = new WebSocket.Server({server, path: "/ws"})
 
 wss.on("connection", (ws) => {
-    connections.set(ws, {userName: null, score: 0})
+  connections.set(ws, { userName: null, score: 0 });
 
-    ws.send(JSON.stringify({type: "userList", users: getOnlineUsers()}))
+  
+  ws.send(JSON.stringify({ type: "userList", users: getOnlineUsers() }));
 
-    ws.on("message", (raw) => {
-        try {
-            const msg = JSON.parse(raw)
-            if (msg.type === "join") {
-                connections.set(ws, {userName: msg.userName, score: msg.score ?? 0})
-                broadcast({type: "userList", users: getOnlineUsers()})
-            } else if (msg.type === "scoreUpdate") {
-                const current = connections.get(ws) || {}
-                connections.set(ws, {...current, score: msg.score})
-                broadcast({type: "userList", users: getOnlineUsers()})
-            }
-        } catch (e) {
+  ws.on("message", (raw) => {
+    try {
+      const msg = JSON.parse(raw);
+      if (msg.type === "join") {
+        connections.set(ws, { userName: msg.userName, score: msg.score ?? 0 });
+        broadcast({ type: "userList", users: getOnlineUsers() });
+      } else if (msg.type === "scoreUpdate") {
+        const current = connections.get(ws) || {};
+        connections.set(ws, { ...current, score: msg.score });
+        broadcast({ type: "userList", users: getOnlineUsers() });
+      }
+    } catch (e) {
+      
+    }
+  });
 
-        }
-    })
-})
+  ws.on("close", () => {
+    connections.delete(ws);
+    broadcast({ type: "userList", users: getOnlineUsers() });
+  });
+});
+
+
 
