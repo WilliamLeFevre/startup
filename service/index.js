@@ -199,6 +199,12 @@ function updateScores(newScore) {
     return scores
 }
 
+async function createUser(username, password) {
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = {username, password: passwordHash, token: uuid.v4()};
+    users.push(user)
+    return user;
+}
 
 
 
