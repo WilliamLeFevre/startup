@@ -219,3 +219,6 @@ function setAuthCookie(res, authToken) {
     })
 }
 
+server.listen(port, () => {
+    console.log("Listening")
+})
