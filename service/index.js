@@ -176,5 +176,16 @@ function getOnlineUsers() {
     return list;
 }
 
+function broadcast(payload) {
+    const msg = JSON.stringify(payload)
+    for (const client of wss.client) {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(msg)
+        }
+    }
+}
+
+
+
 
 
