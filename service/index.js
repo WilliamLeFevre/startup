@@ -2,12 +2,15 @@ const express = require("express");
 const cookieParser = require("cookie-parser")
 const bcrypt = require("bcryptjs")
 const uuid = require("uuid")
+const WebSocket = require("ws")
 
 const app = express();
 const authCookieName = "token";
 
 let users = [];
 let scores = [];
+
+const connections = new Map()
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -130,3 +133,4 @@ function setAuthCookie(res, authToken) {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 })
+
