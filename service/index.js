@@ -166,5 +166,15 @@ wss.on("connection", (ws) => {
   });
 });
 
+function getOnlineUsers() {
+    const list = []
+    for (const info of connections.values()) {
+        if (info.userName) {
+            list.push({userName: info.userName, score: info.score})
+        }
+    }
+    return list;
+}
+
 
 
