@@ -1,57 +1,61 @@
-import React from "react"
+import React from "react";
 
-export function OnlineUsers({userName, score}) {
-    const [users, setUsers] = React.useState([])
+export function OnlineUsers({ userName, score }) {
+  const [users, setUsers] = React.useState([]);
+  const wsRef = React.useRef(null);
 
-    React.useEffect(() => {
-        setUsers(getOnlineUsers())
-        const interval = setInterval(() => {
-            setUsers(getOnlineUsers())
-        }, 4000)
+  React.useEffect(() => {
+    // Determine the right WS URL whether running through Vite dev-proxy or
+    // directly against the Node service.
+    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    const wsUrl = `${protocol}//${window.location.host}/ws`;
 
-        return () => clearInterval(interval)
-    }, [score])
+    const ws = new WebSocket(wsUrl);
+    wsRef.current = ws;
 
-    function getOnlineUsers() {
-        const fruits = [
-            "Apple",
-            "Banana",
-            "Mango",
-            "Pineapple",
-            "Strawberry",
-            "Orange",
-            "Grape",
-            "Peach",
-            "Kiwi",
-            "Watermelon"
-        ];
+    ws.onopen = () => {
+      // Announce ourselves to the server
+      ws.send(JSON.stringify({ type: "join", userName, score }));
+    };
 
-        console.log(score)
-        let onlineUsers = [{userName: userName, score: score}]
-        console.log(onlineUsers)
-        for (let i=0; i < Math.floor(Math.random() * 10); i++) {
-            let randomUserName = fruits[Math.floor(Math.random() * fruits.length)] + "Flash";
-            let randomScore = Math.floor(Math.random() * 100)
-            onlineUsers = [...onlineUsers, {userName: randomUserName, score: randomScore}]
+    ws.onmessage = (event) => {
+      try {
+        const msg = JSON.parse(event.data);
+        if (msg.type === "userList") {
+          setUsers(msg.users);
         }
-        
-        
-        return onlineUsers
-    }
+      } catch (e) {
+        // ignore
+      }
+    };
 
-    const userRows = []
-    for (let i=0; i < users.length; i++) {
-        userRows.push(
-            <li className="fs-5">{users[i].userName}-{users[i].score}</li>
-        )
-    }
+    ws.onclose = () => {};
 
-    return (
-        <div className="col-2 d-none d-xl-block p-3">
-            <h5>Online Users</h5>
-            <ul className="list-unstyled text-nowrap border border-dark p-1">
-                {userRows}
-            </ul>
-        </div>
-    )
+    return () => {
+      ws.close();
+    };
+    // Only reconnect when userName changes (i.e. on login/logout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userName]);
+
+  // When score changes mid-game, push the update without reconnecting
+  React.useEffect(() => {
+    const ws = wsRef.current;
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type: "scoreUpdate", score }));
+    }
+  }, [score]);
+
+  return (
+    <div className="col-2 d-none d-xl-block p-3">
+      <h5>Online Users</h5>
+      <ul className="list-unstyled text-nowrap border border-dark p-1">
+        {users.map((u, i) => (
+          <li key={i} className="fs-5">
+            {u.userName} – {u.score}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
