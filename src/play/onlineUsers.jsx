@@ -5,8 +5,7 @@ export function OnlineUsers({ userName, score }) {
   const wsRef = React.useRef(null);
 
   React.useEffect(() => {
-    // Determine the right WS URL whether running through Vite dev-proxy or
-    // directly against the Node service.
+    
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     const wsUrl = `${protocol}//${window.location.host}/ws`;
 
@@ -14,7 +13,7 @@ export function OnlineUsers({ userName, score }) {
     wsRef.current = ws;
 
     ws.onopen = () => {
-      // Announce ourselves to the server
+ 
       ws.send(JSON.stringify({ type: "join", userName, score }));
     };
 
@@ -25,7 +24,7 @@ export function OnlineUsers({ userName, score }) {
           setUsers(msg.users);
         }
       } catch (e) {
-        // ignore
+        
       }
     };
 
@@ -34,11 +33,10 @@ export function OnlineUsers({ userName, score }) {
     return () => {
       ws.close();
     };
-    // Only reconnect when userName changes (i.e. on login/logout)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [userName]);
 
-  // When score changes mid-game, push the update without reconnecting
+
   React.useEffect(() => {
     const ws = wsRef.current;
     if (ws && ws.readyState === WebSocket.OPEN) {
